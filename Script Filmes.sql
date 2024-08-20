@@ -325,3 +325,51 @@ REFERENCES [dbo].[Generos] ([Id])
 GO
 ALTER TABLE [dbo].[FilmesGenero] CHECK CONSTRAINT [FK__FilmesGen__IdGen__2E1BDC42]
 GO
+-- 1
+SELECT Nome, Ano FROM Filmes;
+GO
+
+-- 2
+SELECT Nome, Ano, Duracao FROM Filmes ORDER BY Ano;
+GO
+
+-- 3
+SELECT Nome, Ano, Duracao FROM Filmes WHERE NOME LIKE '%Volta%Futuro';
+GO
+
+-- 4
+SELECT Nome, Ano, Duracao FROM Filmes WHERE ANO = 1997;
+GO
+
+-- 5
+SELECT Nome, Ano, Duracao FROM Filmes WHERE ANO > 2000;
+GO
+
+-- 6
+SELECT Nome, Ano, Duracao FROM Filmes WHERE DURACAO > 100 AND DURACAO < 150 ORDER BY DURACAO;
+GO
+
+-- 7
+SELECT Ano, COUNT(*) QUANTIDADE FROM Filmes GROUP BY ANO ORDER BY QUANTIDADE DESC;
+GO
+
+-- 8
+SELECT PrimeiroNome, UltimoNome, Genero FROM Atores WHERE Genero = 'M';
+GO
+
+-- 9
+SELECT PrimeiroNome, UltimoNome, Genero FROM Atores WHERE Genero = 'F' ORDER BY PrimeiroNome;
+GO
+
+-- 10
+SELECT f.Nome, g.Genero FROM Filmes f inner join FilmesGenero fg ON f.Id = fg.IdFilme inner join Generos g on fg.IdGenero = g.Id;
+GO
+
+-- 11
+SELECT f.Nome, g.Genero FROM Filmes f inner join FilmesGenero fg ON f.Id = fg.IdFilme inner join Generos g on fg.IdGenero = g.Id 
+WHERE g.Genero = 'Mistério';
+GO
+
+-- 12
+SELECT f.Nome, a.PrimeiroNome, a.UltimoNome, ef.Papel FROM Filmes f inner join ElencoFilme ef ON f.Id = ef.IdFilme inner join Atores a on ef.IdAtor = a.Id;
+GO
